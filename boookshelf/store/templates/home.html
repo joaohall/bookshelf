@@ -1,5 +1,151 @@
-{% extends 'base/base.html' %} {% block title %}
+{% extends 'base/base.html' %} {% load static %} {% block title %}
 <title>Bookshelf</title>
+<link rel="stylesheet" href="{% static '/styles/home/style.css' %}">
 {% endblock %} {% block content %}
-<section></section>
+<section class="container">
+  <div class="p-3">
+    <div
+      id="carouselExampleFade"
+      class="carousel slide border overflow-hidden rounded-3"
+      data-bs-ride="carousel"
+    >
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img
+            src="{% static '/src/placeholder/banner1.png' %}"
+            class="d-block w-100"
+            alt="..."
+          />
+        </div>
+        <div class="carousel-item">
+          <img
+            src="{% static '/src/placeholder/banner2.png' %}"
+            class="d-block w-100"
+            alt="..."
+          />
+        </div>
+        <div class="carousel-item">
+          <img
+            src="{% static '/src/placeholder/banner3.png' %}"
+            class="d-block w-100"
+            alt="..."
+          />
+        </div>
+      </div>
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#carouselExampleFade"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden shadow-lg">Previous</span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#carouselExampleFade"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden shadow-lg">Next</span>
+      </button>
+    </div>
+  </div>
+  <div class="m-3 my-5">
+    <h3 class="mb-4">Livros em promoção</h3>
+    <div>
+      {% for item in books_discount%}
+      <div
+        style="width: 14rem"
+        class="border card bg-white d-inline-flex flex-column gap-1 rounded-3"
+      >
+        <img src="{{item.photo}}" class="card-img-top" />
+        <div class="card-body">
+          <h6 class="m-0 card-tile">{{ item.title }}</h6>
+          <p class="m-0 card-tile">{{ item.author }}</p>
+
+          <p class="m-0">R$ {{ item.price }}</p>
+          <p class="m-0 text-success fw-semibold" >Frete Gratis</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="m-3 shadow-sm overflow-hidden position-relative rounded-3">
+    <div class="bg-primary bg-gradient h-100 p-4">
+      <h5 class="fw-semibold m-0 text-white">
+        Assine o nosso pacote Bookshelf e ganhe diversos benefícios!
+      </h5>
+    </div>
+    <div class="bg-white h-100 p-3">
+      <h6 class="fw-semibold">Por somente ‎R$ 9,90‎ /mês você tem:</h6>
+      <div class="d-flex">
+        <div class="m-auto">a</div>
+        <div class="m-auto">a</div>
+        <div class="m-auto">a</div>
+        <div class="m-auto">a</div>
+      </div>
+    </div>
+  </div>
+  <div class="m-3 my-5">
+    <h3 class="mb-4">Categoria do dia</h3>
+    <div>
+      {% for item in books%}
+      <div
+        style="width: 14rem"
+        class="border card bg-white d-inline-flex flex-column gap-1 rounded-3"
+      >
+        <img src="{{item.photo}}" class="card-img-top" />
+        <div class="card-body">
+          <h6 class="m-0 card-tile">{{ item.title }}</h6>
+          <p class="m-0">R$ {{ item.price }}</p>
+          <p class="m-0 text-success fw-semibold" >Frete Gratis</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="m-3 my-5">
+    <h3 class="mb-4">Também pode te interessar</h3>
+    <div>
+      {% for item in books%}
+      <div
+        style="width: 14rem"
+        class="border card bg-white d-inline-flex flex-column gap-1 rounded-3"
+      >
+        <img src="{{item.photo}}" class="card-img-top" />
+        <div class="card-body">
+          <h6 class="m-0 card-tile">{{ item.title }}</h6>
+          <p class="m-0">R$ {{ item.price }}</p>
+          <p class="m-0 text-success fw-semibold" >Frete Gratis</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="m-3 my-5">
+    <h3 class="mb-4">Livros em alta</h3>
+    <div>
+      {% for item in books_treding %}
+        
+        <div
+        style="width: 14rem"
+        class="border card bg-white d-inline-flex flex-column gap-1 rounded-3"
+      >
+        <img src="{{item.photo}}" class="card-img-top" />
+        <div class="card-body">
+          <h6 class="m-0 card-tile">{{ item.title }}</h6>
+          <p class="m-0">R$ {{ item.price }}</p>
+          <p class="m-0 text-success fw-semibold" >Frete Gratis</p>
+        </div>
+      </div>
+   
+      {% endfor %}
+    </div>
+  </div>
+  
+</section>
 {% endblock %}

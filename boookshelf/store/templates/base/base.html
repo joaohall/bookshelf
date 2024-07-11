@@ -10,13 +10,14 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     {% block title %} {% endblock %}
   </head>
-  <body>
+  <body class="bg-body-secondary">
     <header class="bg-white border-1 border">
       <div class="container p-3 align-items-center flex-row d-flex justify-content-between">
         <div class="d-flex gap-3 align-items-center">
-          <a href="/" class="text-decoration-none">
+          <a href="/" class="text-decoration-none me-4">
             <img src="{% static 'src/small_logo.svg' %}" width="25"/>
           </a>
           <a href="#" class="text-decoration-none text-dark">Categorias</a>
@@ -24,11 +25,15 @@
           <a href="#" class="text-decoration-none text-dark">Histórico</a>
           <a href="#" class="text-decoration-none text-dark">Contato</a>
         </div>
-        <div class="d-flex align-items-center gap-4 flex-row w-50">
+        <div class="d-flex align-items-center gap-2 flex-row w-50">
           <form class="w-100">
             <input class="form-control" placeholder="Pesquisar livros">
           </form>
+          <a href='#'>
+            <svg class="position-relative" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#3D3D3D"><path d="M280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z"/></svg>
+          </a>
           <div class="dropdown flex-shrink-0">
+           
             <button class="d-block link-body-emphasis text-decoration-none dropdown-toggle bg-transparent border-0" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
               <img width="30" class="rounded-circle" src="{% static 'src/placeholder/profile_picture_placeholder.png' %}">
             </button>
@@ -41,7 +46,6 @@
               <li><a class="dropdown-item" href="#">Entrar</a></li>
             </ul>
           </div>
-          
         </div>
       </div>
     </header>
