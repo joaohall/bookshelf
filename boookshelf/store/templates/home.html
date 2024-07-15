@@ -1,6 +1,7 @@
 {% extends 'base/base.html' %} {% load static %} {% block title %}
 <title>Bookshelf</title>
-<link rel="stylesheet" href="{% static '/styles/home/style.css' %}">
+<link rel="stylesheet" href="{% static '/styles/home/style.css' %}" />
+
 {% endblock %} {% block content %}
 <section class="container">
   <div class="p-3">
@@ -8,23 +9,24 @@
       id="carouselExampleFade"
       class="carousel slide border overflow-hidden rounded-3"
       data-bs-ride="carousel"
+    
     >
       <div class="carousel-inner">
-        <div class="carousel-item active">
+        <div class="carousel-item active" data-bs-interval="4000">
           <img
             src="{% static '/src/placeholder/banner1.png' %}"
             class="d-block w-100"
             alt="..."
           />
         </div>
-        <div class="carousel-item">
+        <div class="carousel-item" data-bs-interval="4000">
           <img
             src="{% static '/src/placeholder/banner2.png' %}"
             class="d-block w-100"
             alt="..."
           />
         </div>
-        <div class="carousel-item">
+        <div class="carousel-item" data-bs-interval="4000">
           <img
             src="{% static '/src/placeholder/banner3.png' %}"
             class="d-block w-100"
@@ -56,19 +58,21 @@
     <h3 class="mb-4">Livros em promoção</h3>
     <div>
       {% for item in books_discount%}
-      <div
-        style="width: 14rem"
-        class="border card bg-white d-inline-flex flex-column gap-1 rounded-3"
+      <a
+      href="{% url "book_detail" pk=item.pk %}"
+        style="width: 14rem; height: 30rem"
+        class="border text-decoration-none card bg-white m-1 d-inline-flex flex-column gap-1 rounded-3"
       >
         <img src="{{item.photo}}" class="card-img-top" />
         <div class="card-body">
-          <h6 class="m-0 card-tile">{{ item.title }}</h6>
-          <p class="m-0 card-tile">{{ item.author }}</p>
-
-          <p class="m-0">R$ {{ item.price }}</p>
-          <p class="m-0 text-success fw-semibold" >Frete Gratis</p>
+          <h6 class="m-0 card-tile text-truncate">{{ item.title }}</h6>
+          <p class="m-0">{{item.author}}</p>
+          <div>
+            <h7 class="m-0">R$ {{ item.price }}</h7>
+            <p class="m-0 text-success fw-semibold">Frete Gratis</p>
+          </div>
         </div>
-      </div>
+      </a>
       {% endfor %}
     </div>
   </div>
@@ -81,29 +85,55 @@
     </div>
     <div class="bg-white h-100 p-3">
       <h6 class="fw-semibold">Por somente ‎R$ 9,90‎ /mês você tem:</h6>
-      <div class="d-flex">
-        <div class="m-auto">a</div>
-        <div class="m-auto">a</div>
-        <div class="m-auto">a</div>
-        <div class="m-auto">a</div>
+      <div class="d-flex fw-semibold p-3 gap-3 justify-content-center">
+        <div class="m-auto w-25 d-flex align-items-center justify-content-center   gap-2">
+          <span class="material-symbols-outlined border p-2 rounded-2 "> local_shipping </span>
+          <p class="mb-0">
+            Frete grátis em compras a partir de R$50 para todo o Brasíl
+          </p>
+        </div>
+        <div class="m-auto w-25 d-flex align-items-center gap-2">
+          <span class="material-symbols-outlined border p-2 rounded-2 "> book_5 </span>
+          <p class="mb-0">
+             Livros gratuitos toda semana com base no seu gosto
+          </p>
+        </div>
+        <div class="m-auto w-25 d-flex align-items-center gap-2">
+          <span class="material-symbols-outlined border p-2 rounded-2 "> cloud </span>
+          <p class="mb-0">
+            Biblioteca em nuvem para leitura dos seus livros favoritos
+          </p>
+        </div>
+        <div class="m-auto w-25 d-flex align-items-center gap-2">
+          <span class="material-symbols-outlined border p-2 rounded-2 "> library_books </span>
+          <p class="mb-0">
+            Acesso a uma biblioteca com +1000 ebooks para leitura.
+          </p>
+        </div>
       </div>
     </div>
   </div>
   <div class="m-3 my-5">
     <h3 class="mb-4">Categoria do dia</h3>
-    <div>
+    <div class="">
       {% for item in books%}
-      <div
-        style="width: 14rem"
-        class="border card bg-white d-inline-flex flex-column gap-1 rounded-3"
+      <a
+      href="{% url "book_detail" pk=item.pk %}"
+        style="width: 14rem; height: 28rem"
+        class="border text-decoration-none card bg-white m-1 d-inline-flex flex-column gap-1 rounded-3"
       >
         <img src="{{item.photo}}" class="card-img-top" />
         <div class="card-body">
-          <h6 class="m-0 card-tile">{{ item.title }}</h6>
-          <p class="m-0">R$ {{ item.price }}</p>
-          <p class="m-0 text-success fw-semibold" >Frete Gratis</p>
+          <h6 class="m-0 card-tile text-truncate">{{ item.title }}</h6>
+          <div>
+            <h7 class="m-0">R$ {{ item.price }}</h7>
+            {% for rating in book.rating_set.all %}
+              <a>{{rating.rating}}</a>
+            {%endfor%}
+            <p class="m-0 text-success fw-semibold">Frete Gratis</p>
+          </div>
         </div>
-      </div>
+      </a>
       {% endfor %}
     </div>
   </div>
@@ -111,17 +141,20 @@
     <h3 class="mb-4">Também pode te interessar</h3>
     <div>
       {% for item in books%}
-      <div
-        style="width: 14rem"
-        class="border card bg-white d-inline-flex flex-column gap-1 rounded-3"
+      <a
+      href="{% url "book_detail" pk=item.pk %}"
+        style="width: 14rem; height: 28rem"
+        class="border text-decoration-none card bg-white m-1 d-inline-flex flex-column gap-1 rounded-3"
       >
         <img src="{{item.photo}}" class="card-img-top" />
         <div class="card-body">
-          <h6 class="m-0 card-tile">{{ item.title }}</h6>
-          <p class="m-0">R$ {{ item.price }}</p>
-          <p class="m-0 text-success fw-semibold" >Frete Gratis</p>
+          <h6 class="m-0 card-tile text-truncate">{{ item.title }}</h6>
+          <div>
+            <h7 class="m-0">R$ {{ item.price }}</h7>
+            <p class="m-0 text-success fw-semibold">Frete Gratis</p>
+          </div>
         </div>
-      </div>
+      </a>
       {% endfor %}
     </div>
   </div>
@@ -129,23 +162,23 @@
   <div class="m-3 my-5">
     <h3 class="mb-4">Livros em alta</h3>
     <div>
-      {% for item in books_treding %}
-        
-        <div
-        style="width: 14rem"
-        class="border card bg-white d-inline-flex flex-column gap-1 rounded-3"
+      {% for item in books_trending%}
+      <a
+      href="{% url "book_detail" pk=item.pk %}"
+        style="width: 14rem; height: 28rem"
+        class="border text-decoration-none card bg-white m-1 d-inline-flex flex-column gap-1 rounded-3"
       >
         <img src="{{item.photo}}" class="card-img-top" />
         <div class="card-body">
-          <h6 class="m-0 card-tile">{{ item.title }}</h6>
-          <p class="m-0">R$ {{ item.price }}</p>
-          <p class="m-0 text-success fw-semibold" >Frete Gratis</p>
+          <h6 class="m-0 card-tile text-truncate">{{ item.title }}</h6>
+          <div>
+            <h7 class="m-0">R$ {{ item.price }}</h7>
+            <p class="m-0 text-success fw-semibold">Frete Gratis</p>
+          </div>
         </div>
-      </div>
-   
+      </a>
       {% endfor %}
     </div>
   </div>
-  
 </section>
 {% endblock %}

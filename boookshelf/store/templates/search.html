@@ -1,0 +1,26 @@
+{% extends "base/base.html" %} {% load static %} {% block title %}
+<title>Pesquisa</title>
+<link rel="stylesheet" href="{% static '/styles/home/style.css' %}" />
+
+{% endblock %} {% block content %}
+<section class="container">
+  <div>
+    {% for item in books_filtered%}
+    <div
+      style="width: 14rem; height: 28rem"
+      class="border card bg-white m-1 d-inline-flex flex-column gap-1 rounded-3"
+    >
+      <img src="{{item.photo.url}}" class="card-img-top" />
+      <div class="card-body">
+        <h6 class="m-0 card-tile text-truncate">{{ item.title }}</h6>
+        <div>
+          <p class="m-0">R$ {{ item.price }}</p>
+          
+          <p class="m-0 text-success fw-semibold">Frete Gratis</p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
